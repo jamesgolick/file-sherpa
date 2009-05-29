@@ -8,12 +8,17 @@
     <script type="text/javascript">
       $(function() {
 	$('#single_file').fileSherpa();
+	$('#single_file').bind('fileSelect', function(event) {
+	  $('#files').val(event.fileList.file0.name);
+	});
       });
     </script>
   </head>
   <body>
-    <div id="single_file">
+    <div id="single_file" style="position:absolute; top:0px;width:55px;height:25px;">
     </div>
+    <a href="#">Browse!</a>
+    <input type="text" id="files" />
   </body>
 </html>
 
