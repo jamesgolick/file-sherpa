@@ -73,7 +73,7 @@ var FileSherpa = {};
       var self = this;
       this.element.bind('fileSelect', function(event) {
 	self.getFileIdField().val(event.fileList.file0.id);
-	self.element.find('.fileSherpa-filename').val(event.fileList.file0.name);
+	self.getFilenameField().val(event.fileList.file0.name);
       });
 
       this.element.find('.fileSherpa-upload-link').click(function() {
@@ -107,6 +107,9 @@ var FileSherpa = {};
     },
     getFileIdField: function() {
       return this.element.find('.fileSherpa-file-id');
+    },
+    getFilenameField: function() {
+      return this.element.find('.fileSherpa-filename');
     },
     setProgress: function(percentComplete) {
       var width = [percentComplete, '%'].join('');
