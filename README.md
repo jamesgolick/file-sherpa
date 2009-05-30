@@ -22,17 +22,15 @@ Then, use the fileSherpa function to convert your field in to a file upload widg
 
 That line will replace your file field with a full blown file upload widget, including progress bar. The HTML for that widget looks like this:
 
-  &lt;div class="fileSherpa-upload-container" id="file-field"&gt;
-    &lt;div class="fileSherpa-upload-overlay" id="fileSherpa-swf-n"&gt;&lt;/div&gt;
-    &lt;div class="fileSherpa-upload-ui"&gt;
-      &lt;input type="text" class="fileSherpa-filename" /&gt;
-      &lt;input type="hidden" class="fileSherpa-file-id" /&gt;
-      &lt;a href="#" class="fileSherpa-browse-link"&gt;Browse&lt;/a&gt;
-      &lt;a href="#" class="fileSherpa-upload-link"&gt;Upload&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class="fileSherpa-progress-bar"&gt;
-      &lt;div class="fileSherpa-progress"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-
+    <div class="fileSherpa-upload-container">
+      <div class="fileSherpa-upload-overlay"></div>
+      <div class="fileSherpa-upload-ui">
+	<input type="text" class="fileSherpa-filename" />
+	<input type="hidden" class="fileSherpa-file-id" />
+	<a href="#" class="fileSherpa-browse-link">Browse</a>
+	<a href="#" class="fileSherpa-upload-link">Upload</a>
+      </div>
+      <div class="fileSherpa-progress-bar">
+	<div class="fileSherpa-progress"></div>
+      </div>
+    </div>
