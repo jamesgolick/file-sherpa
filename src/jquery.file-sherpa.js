@@ -72,12 +72,12 @@ var FileSherpa = {};
     initSwfEvents: function() {
       var self = this;
       this.element.bind('fileSelect', function(event) {
-	self.element.find('.fileSherpa-file-id').val(event.fileList.file0.id);
+	self.getFileIdField().val(event.fileList.file0.id);
 	self.element.find('.fileSherpa-filename').val(event.fileList.file0.name);
       });
 
       this.element.find('.fileSherpa-upload-link').click(function() {
-	self.getSwfObject().upload(self.element.find('.fileSherpa-file-id').val(),
+	self.getSwfObject().upload(self.getFileIdField().val(),
 			self.options.action,
 			self.options.method,
 			{},
@@ -87,6 +87,9 @@ var FileSherpa = {};
     },
     getSwfObject: function() {
       return document[this.elementId];
+    },
+    getFileIdField: function() {
+      return this.element.find('.fileSherpa-file-id');
     }
   });
 
