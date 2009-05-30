@@ -25,6 +25,7 @@ var FileSherpa = {};
 
       this.initUploaderStructure();
       this.initSwf();
+      this.initSwfEvents();
 
       FileSherpa.registerWidget(this);
     },
@@ -37,8 +38,8 @@ var FileSherpa = {};
       this.element.append($('<div class="fileSherpa-upload-overlay"/>'));
 
       var uploadUi = $('<div class="fileSherpa-upload-ui"/>');
-      uploadUi.append('<input type="text" class="filesherpa-filename"/>');
-      uploadUi.append('<input type="hidden" class="filesherpa-file-id"/>');
+      uploadUi.append('<input type="text" class="fileSherpa-filename"/>');
+      uploadUi.append('<input type="hidden" class="fileSherpa-file-id"/>');
       uploadUi.append('&nbsp;<a href="#" class="fileSherpa-browse-link">Browse</a>');
       uploadUi.append('&nbsp;<a href="#" class="fileSherpa-upload-link">Upload</a>');
       this.element.append(uploadUi);
@@ -62,6 +63,13 @@ var FileSherpa = {};
       this.swf.addVariable('eventHandler', 'FileSherpa.eventHandler');
       this.swf.write(this.swfId);
     },
+    initSwfEvents: function() {
+      var self = this;
+      this.element.bind('fileSelect', function(event) {
+	self.element.find('.fileSherpa-file-id').val(event.fileList.file0.id);
+	self.element.find('.fileSherpa-filename').val(event.fileList.file0.name);
+      });
+    }
   });
 
   $.fn.fileSherpa = function(options) {

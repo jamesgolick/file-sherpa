@@ -7,18 +7,46 @@
     <script type="text/javascript" src="/src/jquery.file-sherpa.js"></script>
     <script type="text/javascript">
       $(function() {
-	$('#single_file').fileSherpa();
-	$('#single_file').bind('fileSelect', function(event) {
-	  $('#files').val(event.fileList.file0.name);
-	});
+	$('#single-file').fileSherpa();
       });
     </script>
+    <style>
+      #single-file .fileSherpa-upload-overlay {
+	position:absolute;
+	top:6px;
+	left: 165px;
+	width: 50px;
+	height: 20px;
+      }
+      .fileSherpa-progress-bar {
+	height: 20px;
+	width: 250px;
+	border: 1px solid #000;
+      }
+    </style>
   </head>
   <body>
-    <div id="single_file" style="position:absolute; top:0px;width:55px;height:25px;">
-    </div>
-    <a href="#">Browse!</a>
-    <input type="text" id="files" />
+    <!--<div class="fileSherpa-upload-container">-->
+      <!--<div class="fileSherpa-upload-overlay"></div>-->
+      <!--<div class="fileSherpa-upload-ui">-->
+	<!--<input type="text" class="fileSherpa-filename" />-->
+	<!--<input type="hidden" class="fileSherpa-file-id" />-->
+	<!--<a href="#" class="fileSherpa-browse-link">Browse</a>-->
+	<!--<a href="#" class="fileSherpa-upload-link">Upload</a>-->
+      <!--</div>-->
+      <!--<div class="fileSherpa-progress-bar">-->
+	<!--<div class="fileSherpa-progress"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <input type="file" id="single-file" />
+
+    <!--<div id="single_file" style="position:absolute; top:0px;width:55px;height:25px;">-->
+    <!--</div>-->
+    <!--<a href="#">Browse!</a>-->
+    <!--<input type="text" id="files" />-->
+    <!--<input type="text" id="id" />-->
+    <!--<a href="#" id="upload">Upload</a>-->
+    <!--<div id="progress_bar"><div id="progress"></div></div>-->
   </body>
 </html>
 
