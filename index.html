@@ -7,7 +7,7 @@
     <script type="text/javascript" src="/src/jquery.file-sherpa.js"></script>
     <script type="text/javascript">
       $(function() {
-	$('#single-file').fileSherpa();
+	  $('#single-file').fileSherpa({action: "/upload"});
       });
     </script>
     <style>
@@ -38,7 +38,7 @@
 	<!--<div class="fileSherpa-progress"></div>-->
       <!--</div>-->
     <!--</div>-->
-    <input type="file" id="single-file" />
+    <input type="file" id="single-file" name="fileData" />
 
     <!--<div id="single_file" style="position:absolute; top:0px;width:55px;height:25px;">-->
     <!--</div>-->

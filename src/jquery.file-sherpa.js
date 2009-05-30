@@ -16,12 +16,18 @@ var FileSherpa = {};
 
   $.extend(FileSherpa.widget.prototype, {
     initialize: function(element, options) {
-      this.options = $.extend({swfUrl: "/flash/uploader.swf",
-			       width:  250,
-			       height: 250}, options);
+      this.options = $.extend({swfUrl:    "/flash/uploader.swf",
+			       width:     250,
+			       height:    250,
+			       action:	  "/files",
+			       method:    "post",
+			       fieldName: "file"}, options);
       this.element   = $(element);
       this.elementId = $(element).attr('id');
       this.swfId     = ["fileSherpa-swf-", FileSherpa.widgetCount].join('');
+
+      if (this.element.attr('name'))
+	this.options.fieldName = this.element.attr('name');
 
       this.initUploaderStructure();
       this.initSwf();
@@ -69,6 +75,18 @@ var FileSherpa = {};
 	self.element.find('.fileSherpa-file-id').val(event.fileList.file0.id);
 	self.element.find('.fileSherpa-filename').val(event.fileList.file0.name);
       });
+
+      this.element.find('.fileSherpa-upload-link').click(function() {
+	self.getSwfObject().upload(self.element.find('.fileSherpa-file-id').val(),
+			self.options.action,
+			self.options.method,
+			{},
+			self.options.fieldName);
+	return false;
+      });
+    },
+    getSwfObject: function() {
+      return document[this.elementId];
     }
   });
 
