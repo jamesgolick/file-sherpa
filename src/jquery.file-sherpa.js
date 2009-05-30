@@ -78,10 +78,10 @@ var FileSherpa = {};
 
       this.element.find('.fileSherpa-upload-link').click(function() {
 	self.getSwfObject().upload(self.getFileIdField().val(),
-			self.options.action,
-			self.options.method,
-			{},
-			self.options.fieldName);
+				   self.options.action,
+				   self.options.method,
+				   {},
+				   self.options.fieldName);
 	return false;
       });
 
