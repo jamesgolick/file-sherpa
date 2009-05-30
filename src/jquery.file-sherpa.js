@@ -85,6 +85,10 @@ var FileSherpa = {};
 	return false;
       });
 
+      this.element.bind('uploadStart', function(event) {
+	self.setProgress(1);
+      });
+
       this.element.bind('uploadProgress', function(event) {
 	self.setProgress(event.percentComplete);
       });
