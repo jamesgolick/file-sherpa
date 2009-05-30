@@ -10,7 +10,7 @@ var FileSherpa = {};
     widgets: {},
     widget: function() { this.initialize.apply(this, arguments); },
     eventHandler: function(id, event) {
-      FileSherpa.widgets[id].element.trigger(event);
+      FileSherpa.widgets[id].eventHandler(event);
     }
   });
 
@@ -84,6 +84,18 @@ var FileSherpa = {};
 			self.options.fieldName);
 	return false;
       });
+
+      this.element.bind('uploadProgress', function(event) {
+      console.log([event.percentComplete, '%'].join(''));
+	self.element.find('.fileSherpa-progress').css('width', [event.percentComplete, '%'].join(''));
+      });
+    },
+    eventHandler: function(event) {
+      if (event.type == 'uploadProgress') {
+	event.percentComplete = parseInt(event.bytesLoaded / event.bytesTotal * 100);
+      }
+
+      this.element.trigger(event);
     },
     getSwfObject: function() {
       return document[this.elementId];
