@@ -9,7 +9,7 @@
       $(function() {
 	$('#single-file').fileSherpa({action: "/upload"});
 	$('#single-file').bind('uploadCompleteData', function(event) {
-	  console.log(event.data);
+	  console.log(event.responseData);
 	});
       });
     </script>
@@ -47,6 +47,7 @@
       <!--</div>-->
     <!--</div>-->
     <input type="file" id="single-file" name="fileData" />
+
   </body>
 </html>
 

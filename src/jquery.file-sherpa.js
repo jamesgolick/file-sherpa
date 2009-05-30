@@ -96,6 +96,8 @@ var FileSherpa = {};
     eventHandler: function(event) {
       if (event.type == 'uploadProgress') {
 	event.percentComplete = parseInt(event.bytesLoaded / event.bytesTotal * 100);
+      } else if (event.type == 'uploadCompleteData') {
+	event.responseData = event.data;
       }
 
       this.element.trigger(event);
