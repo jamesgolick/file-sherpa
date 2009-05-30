@@ -86,8 +86,11 @@ var FileSherpa = {};
       });
 
       this.element.bind('uploadProgress', function(event) {
-      console.log([event.percentComplete, '%'].join(''));
-	self.element.find('.fileSherpa-progress').css('width', [event.percentComplete, '%'].join(''));
+	self.setProgress(event.percentComplete);
+      });
+
+      this.element.bind('uploadComplete', function(event) {
+	self.setProgress(100);
       });
     },
     eventHandler: function(event) {
@@ -102,6 +105,10 @@ var FileSherpa = {};
     },
     getFileIdField: function() {
       return this.element.find('.fileSherpa-file-id');
+    },
+    setProgress: function(percentComplete) {
+      var width = [percentComplete, '%'].join('');
+      this.element.find('.fileSherpa-progress').css('width', width);
     }
   });
 
