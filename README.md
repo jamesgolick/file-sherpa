@@ -81,7 +81,7 @@ File sherpa was developed by (and is copyright) [James Golick](http://jamesgolic
 
 File sherpa and swfobject are [MIT licensed](http://en.wikipedia.org/wiki/MIT_License).
 
-The flash piece is BSD licensed [details here](http://developer.yahoo.com/yui/license.html).
+The flash piece is BSD licensed: [details here](http://developer.yahoo.com/yui/license.html).
 
 
 
