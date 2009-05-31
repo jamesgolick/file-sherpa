@@ -12,6 +12,8 @@ File uploads on the web are still a pain in the ass. File sherpa aims to soften 
 
 ## Usage
 
+Take flash/uploader.swf and put it somewhere publicly accessible. Note that this file *must* be served by a web server, due to flash security policy. File sherpa currently expects it at "/flash/uploader.swf", but you can override that by passing swfUrl: "/path/to/your/swf" to the jQuery().fileSherpa method.
+
 Create a file field in your html:
 
   &lt;input type="file" name="fileData" id="file-field" /&gt;
