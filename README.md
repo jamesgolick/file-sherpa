@@ -22,7 +22,7 @@ Then, use the fileSherpa function to convert your field in to a file upload widg
 
 That line will replace your file field with a full blown file upload widget, including progress bar. The HTML for that widget looks like this:
 
-    <div class="fileSherpa-upload-container">
+    <div class="fileSherpa-upload-container" id="file-field">
       <div class="fileSherpa-upload-overlay"></div>
       <div class="fileSherpa-upload-ui">
 	<input type="text" class="fileSherpa-filename" />
@@ -34,3 +34,26 @@ That line will replace your file field with a full blown file upload widget, inc
 	<div class="fileSherpa-progress"></div>
       </div>
     </div>
+
+You'll need to style the upload overlay so that it covers the Browse button entirely. When a user clicks the browse button, they'll actually be clicking the overlay. So, you'll need to animate hover and blur events yourself via javascript. This is all because of the security rules in Flash Player 10: the browse button must be part of the flash movie itself; it cannot be triggered by javascript.
+
+## Events
+
+To integrate this widget with your UI, you'll need to subscribe to one or more events that the flash movie fires. Those events get relayed to the parent element of the uploader widget. *That element will assume the dom id of the element it replaced.*  Here's a list of possible events:
+
+* mouseDown (on the browse button)
+* mouseUp (on the browse button)
+* rollOver (on the browse button)
+* rollOut (on the browse button)
+* click (on the browse button)
+* fileSelect
+** event.fileList0-n will contain information about the file(s) that were selected. To access this information, you'll have to iterate over the hash and check to see that the key matches /fileList\d/. Each file object will contain the following parameters:
+** size (Number - file size in bytes)
+** cDate (Date - Creation date for the file)
+
+
+
+## Plans
+
+
+
