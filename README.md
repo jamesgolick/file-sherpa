@@ -83,5 +83,3 @@ File sherpa and swfobject are [MIT licensed](http://en.wikipedia.org/wiki/MIT_Li
 
 The flash piece is BSD licensed: [details here](http://developer.yahoo.com/yui/license.html).
 
-
-
