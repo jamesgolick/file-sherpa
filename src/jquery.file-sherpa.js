@@ -77,11 +77,8 @@ var FileSherpa = {};
       });
 
       this.element.find('.fileSherpa-upload-link').click(function() {
-	self.getSwfObject().upload(self.getFileIdField().val(),
-				   self.options.action,
-				   self.options.method,
-				   {},
-				   self.options.fieldName);
+	self.startUpload();
+
 	return false;
       });
 
@@ -118,15 +115,26 @@ var FileSherpa = {};
     setProgress: function(percentComplete) {
       var width = [percentComplete, '%'].join('');
       this.element.find('.fileSherpa-progress').css('width', width);
+    },
+    startUpload: function() {
+      this.getSwfObject().upload(self.getFileIdField().val(),
+				 self.options.action,
+				 self.options.method,
+				 {},
+				 self.options.fieldName);
     }
   });
 
   $.fn.fileSherpa = function(options) {
-    this.each(function(i, element) {
-      new FileSherpa.widget(element, options);
-    });
+    if (options) { 
+      this.each(function(i, element) {
+	new FileSherpa.widget(element, options);
+      });
 
-    return this;
+      return this;
+    } else {
+      return FileSherpa.widgets[$(this).find('.fileSherpa-upload-overlay').attr('id')];
+    }
   }
 }(jQuery));
 
