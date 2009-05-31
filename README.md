@@ -47,9 +47,9 @@ To integrate this widget with your UI, you'll need to subscribe to one or more e
 * rollOut (on the browse button)
 * click (on the browse button)
 * fileSelect
-** event.fileList0-n will contain information about the file(s) that were selected. To access this information, you'll have to iterate over the hash and check to see that the key matches /fileList\d/. Each file object will contain the following parameters:
-** size (Number - file size in bytes)
-** cDate (Date - Creation date for the file)
+  * event.fileList0-n will contain information about the file(s) that were selected. To access this information, you'll have to iterate over the hash and check to see that the key matches /fileList\d/. Each file object will contain the following parameters:
+  * size (Number - file size in bytes)
+  * cDate (Date - Creation date for the file)
 
 
 
