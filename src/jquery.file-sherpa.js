@@ -122,9 +122,11 @@ var FileSherpa = {};
   });
 
   $.fn.fileSherpa = function(options) {
-    $(this).each(function(i, element) {
+    this.each(function(i, element) {
       new FileSherpa.widget(element, options);
     });
+
+    return this;
   }
 }(jQuery));
 
