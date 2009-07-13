@@ -16,18 +16,19 @@ var FileSherpa = {};
 
   $.extend(FileSherpa.widget.prototype, {
     initialize: function(element, options) {
+      this.element  = $(element);
+      var fieldName = (this.element.attr('name')) ? this.element.attr('name') : 'file'
+
       this.options = $.extend({swfUrl:    "/flash/uploader.swf",
 			       width:     250,
 			       height:    250,
 			       action:	  "/files",
 			       method:    "post",
-			       fieldName: "file"}, options);
-      this.element   = $(element);
+			       fieldName: fieldName}, options);
+
       this.elementId = $(element).attr('id');
       this.swfId     = ["fileSherpa-swf-", FileSherpa.widgetCount].join('');
-
-      if (this.element.attr('name'))
-	this.options.fieldName = this.element.attr('name');
+      this.swfContainerId = this.swfId + "-container";
 
       this.initUploaderStructure();
       this.initSwf();
@@ -50,15 +51,18 @@ var FileSherpa = {};
       uploadUi.append('&nbsp;<a href="#" class="fileSherpa-upload-link">Upload</a>');
       this.element.append(uploadUi);
 
-      var progressBar = $('<div class="fileSherpa-progress-bar">');
-      progressBar.append($('<div class="fileSherpa-progress"/>'));
-      this.element.append(progressBar);
+      if (!this.options.progressSelector) {
+        var progressBar = $('<div class="fileSherpa-progress-bar">');
+        progressBar.append($('<div class="fileSherpa-progress"/>'));
+        this.element.append(progressBar);
+      }
 
-      this.element.find('.fileSherpa-upload-overlay').attr('id', this.swfId);
+      this.element.find('.fileSherpa-upload-overlay').attr('id', this.swfContainerId);
     },
     initSwf: function() {
+      window[this.swfId] = new Object();
       this.swf = new SWFObject(this.options.swfUrl,
-				 this.element.attr('id'),
+				 this.swfId,
 				 "100%",
 				 "100%",
 				 "9.0.0");
@@ -67,7 +71,8 @@ var FileSherpa = {};
       this.swf.addParam('menu', 'false');
       this.swf.addVariable('elementID', this.swfId);
       this.swf.addVariable('eventHandler', 'FileSherpa.eventHandler');
-      this.swf.write(this.swfId);
+      this.swf.addVariable('allowedDomain', document.location.hostname);
+      this.swf.write(this.swfContainerId);
     },
     initSwfEvents: function() {
       var self = this;
@@ -104,7 +109,7 @@ var FileSherpa = {};
       this.element.trigger(event);
     },
     getSwfObject: function() {
-      return document[this.elementId];
+      return $('#' + this.swfId).get(0);
     },
     getFileIdField: function() {
       return this.element.find('.fileSherpa-file-id');
@@ -113,15 +118,22 @@ var FileSherpa = {};
       return this.element.find('.fileSherpa-filename');
     },
     setProgress: function(percentComplete) {
-      var width = [percentComplete, '%'].join('');
-      this.element.find('.fileSherpa-progress').css('width', width);
+      var width    = [percentComplete, '%'].join('');
+      var progress = null;
+      if (this.options.progressSelector) {
+        progress = $(this.options.progressSelector);
+      } else {
+        progress = this.element.find('.fileSherpa-progress');
+      }
+      progress.css('width', width);
     },
     startUpload: function() {
-      this.getSwfObject().upload(self.getFileIdField().val(),
-				 self.options.action,
-				 self.options.method,
-				 {},
-				 self.options.fieldName);
+      var params = (arguments[0]) ? arguments[0] : {};
+      this.getSwfObject().upload(this.getFileIdField().val(),
+				 this.options.action,
+				 this.options.method,
+				 params,
+				 this.options.fieldName);
     }
   });
 
@@ -133,7 +145,7 @@ var FileSherpa = {};
 
       return this;
     } else {
-      return FileSherpa.widgets[$(this).find('.fileSherpa-upload-overlay').attr('id')];
+      return FileSherpa.widgets[$(this).find('.fileSherpa-upload-overlay').attr('id').replace(/-container/, '')];
     }
   }
 }(jQuery));
